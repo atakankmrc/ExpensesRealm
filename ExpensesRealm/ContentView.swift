@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var realmManager = RealmManager()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            TablesView()
+                .environmentObject(realmManager)
         }
         .padding()
     }
