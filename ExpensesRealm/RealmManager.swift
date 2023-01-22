@@ -70,4 +70,6 @@ class RealmManager: ObservableObject {
         }
     }
     
+    
+    
 }
