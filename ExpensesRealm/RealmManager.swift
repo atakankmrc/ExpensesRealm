@@ -20,7 +20,7 @@ class RealmManager: ObservableObject {
     
     func openRealm() {
         do {
-            let config = Realm.Configuration(schemaVersion: 1)
+            let config = Realm.Configuration(schemaVersion: 2)
             
             Realm.Configuration.defaultConfiguration = config
             
@@ -33,7 +33,7 @@ class RealmManager: ObservableObject {
     
     func getTables() {
         if let localRealm = localRealm {
-            let allTables = localRealm.objects(Table.self).sorted(byKeyPath: "name")
+            let allTables = localRealm.objects(Table.self).sorted(byKeyPath: "isFavourite", ascending: false)
             tables = []
             allTables.forEach { table in
                 tables.append(table)
@@ -41,16 +41,31 @@ class RealmManager: ObservableObject {
         }
     }
     
-    func addTable() {
+    func addTable(name: String) {
         if let localRealm = localRealm {
             do {
                 try localRealm.write({
-                    let newTable = Table(name: "Deneme")
+                    let newTable = Table(name: name)
                     localRealm.add(newTable)
                     getTables()
                 })
             } catch {
                 print("Error adding table \(error)")
+            }
+        }
+    }
+    
+    func favouriteTable(id: ObjectId) {
+        if let localRealm = localRealm {
+            do {
+                let tableToFav = localRealm.objects(Table.self).filter(NSPredicate(format: "id == %@", id))
+                guard !tableToFav.isEmpty else {return}
+                try localRealm.write({
+                    tableToFav[0].isFavourite.toggle()
+                    getTables()
+                })
+            } catch {
+                print("Error to favourite table: \(id) and \(error)")
             }
         }
     }

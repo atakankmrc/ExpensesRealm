@@ -12,10 +12,12 @@ class Table: Object, ObjectKeyIdentifiable {
     
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String = ""
+    @Persisted var isFavourite = false
     
     convenience init(name: String) {
         self.init()
         self.name = name
+        self.isFavourite = isFavourite
     }
     
 }
