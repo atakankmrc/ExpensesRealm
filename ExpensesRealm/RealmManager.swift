@@ -11,6 +11,7 @@ import RealmSwift
 class RealmManager: ObservableObject {
     
     private(set) var localRealm: Realm?
+    
     @Published private(set) var tables: [Table] = []
     @Published private(set) var expenses: [Expense] = []
     
@@ -21,7 +22,7 @@ class RealmManager: ObservableObject {
     
     func openRealm() {
         do {
-            let config = Realm.Configuration(schemaVersion: 2)
+            let config = Realm.Configuration(schemaVersion: 2, deleteRealmIfMigrationNeeded: true)
             
             Realm.Configuration.defaultConfiguration = config
             
@@ -86,19 +87,29 @@ class RealmManager: ObservableObject {
         return tempExpenses
     }
     
+    // MARK: Creating expense on database
     func addExpense(name: String, value: Int, parentTable: Table) {
-        
         if let localRealm = localRealm {
             do {
                 try localRealm.write({
-                    let newExpense = Expense(name: name, value: Double(value), created: Date(), tableId: Int(parentTable.id), parentTable: parentTable)
+                    let newExpense = Expense(name: name, value: Double(value), created: Date(), parentTable: parentTable)
                     localRealm.add(newExpense)
                 })
             } catch {
                 print("Error adding table \(error)")
             }
         }
+    }
+    
+    func getTotalExpenseByTable(table: Table) -> Double {
+        let allExpenses = getExpensesByTable(table: table)
+        var total = 0.0
         
+        allExpenses.forEach { expense in
+            total += expense.value
+        }
+        
+        return total
     }
     
 }

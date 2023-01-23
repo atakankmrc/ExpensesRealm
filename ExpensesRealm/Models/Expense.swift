@@ -16,12 +16,11 @@ class Expense: Object, ObjectKeyIdentifiable {
     @Persisted var tableId: Int
     @Persisted var parentTable: Table?
     
-    convenience init(name: String, value: Double, created: Date, tableId: Int, parentTable: Table) {
+    convenience init(name: String, value: Double, created: Date, parentTable: Table) {
         self.init()
         self.name = name
         self.value = value
         self.created = Date()
-        self.tableId = tableId
         self.parentTable = parentTable
     }
     

@@ -19,24 +19,22 @@ struct ExpensesView: View {
     
     @State private var expenses: [Expense] = []
     
+    @State private var totalExpense = 0.0
     
     var body: some View {
+        
+        Text("\(totalExpense.formatted(.currency(code: "TRY")))")
+        
         List {
             ForEach(expenses) { expense in
-                VStack {
+                VStack(alignment: .leading) {
                     Text(expense.name)
-                        .padding()
+                        .padding(.vertical)
                     
-                    Text("\(expense.value)")
+                    Text("\(expense.value.formatted(.currency(code: "TRY")))")
                 }
             }
         }
-        
-        Button("Add Expense", action: {
-//            realmManager.addExpense(parentTable: table)
-            expenses = realmManager.getExpensesByTable(table: table)
-        })
-        
         
         .sheet(isPresented: $showAddExpense, content: {
             TextField("Expense name", text: $expenseName)
@@ -51,6 +49,7 @@ struct ExpensesView: View {
             Button("Add Expense", action: {
                 realmManager.addExpense(name: expenseName, value: Int(expenseValue.value) ?? 0, parentTable: table)
                 expenses = realmManager.getExpensesByTable(table: table)
+                totalExpense = realmManager.getTotalExpenseByTable(table: table)
                 showAddExpense.toggle()
             })
         })
@@ -61,6 +60,7 @@ struct ExpensesView: View {
             }))
             .onAppear {
                 expenses = realmManager.getExpensesByTable(table: table)
+                totalExpense = realmManager.getTotalExpenseByTable(table: table)
             }
     }
 }
