@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DB28C41297E93A8004883AE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB28C40297E93A8004883AE /* Utils.swift */; };
 		7DE23EC3297D5EE100355F01 /* ExpensesRealmApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE23EC2297D5EE100355F01 /* ExpensesRealmApp.swift */; };
 		7DE23EC5297D5EE100355F01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE23EC4297D5EE100355F01 /* ContentView.swift */; };
 		7DE23EC7297D5EE400355F01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DE23EC6297D5EE400355F01 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7DB28C40297E93A8004883AE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7DE23EBF297D5EE100355F01 /* ExpensesRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpensesRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE23EC2297D5EE100355F01 /* ExpensesRealmApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesRealmApp.swift; sourceTree = "<group>"; };
 		7DE23EC4297D5EE100355F01 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				7DE23ED2297D5EF800355F01 /* Models */,
 				7DE23EC2297D5EE100355F01 /* ExpensesRealmApp.swift */,
 				7DE23ED8297D607300355F01 /* RealmManager.swift */,
+				7DB28C40297E93A8004883AE /* Utils.swift */,
 				7DE23EC6297D5EE400355F01 /* Assets.xcassets */,
 				7DE23EC8297D5EE400355F01 /* Preview Content */,
 			);
@@ -192,6 +195,7 @@
 			files = (
 				7DE23EE3297D88F200355F01 /* Expense.swift in Sources */,
 				7DE23EDF297D6DC300355F01 /* AddTableButton.swift in Sources */,
+				7DB28C41297E93A8004883AE /* Utils.swift in Sources */,
 				7DE23ED1297D5EF200355F01 /* Table.swift in Sources */,
 				7DE23ED9297D607300355F01 /* RealmManager.swift in Sources */,
 				7DE23EE1297D886600355F01 /* ExpensesView.swift in Sources */,

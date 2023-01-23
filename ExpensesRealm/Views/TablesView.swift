@@ -22,7 +22,7 @@ struct TablesView: View {
                     
                     List {
                         ForEach(realmManager.tables) { table in
-                            NavigationLink(destination: ExpensesView(table: table)) {
+                            NavigationLink(destination: ExpensesView(table: table).environmentObject(realmManager)) {
                                 HStack {
                                     Text(table.name)
                                     Text(String(table.id))

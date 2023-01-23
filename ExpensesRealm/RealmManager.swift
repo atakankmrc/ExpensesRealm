@@ -12,6 +12,7 @@ class RealmManager: ObservableObject {
     
     private(set) var localRealm: Realm?
     @Published private(set) var tables: [Table] = []
+    @Published private(set) var expenses: [Expense] = []
     
     init() {
         openRealm()
@@ -70,6 +71,34 @@ class RealmManager: ObservableObject {
         }
     }
     
+    func getExpensesByTable(table: Table) -> [Expense] {
+        
+        var tempExpenses: [Expense] = []
+        
+        if let localRealm = localRealm {
+            let allExpenses = localRealm.objects(Expense.self).filter(NSPredicate(format: "parentTable == %@", table)).sorted(byKeyPath: "created")
+            expenses = []
+            allExpenses.forEach { expense in
+                expenses.append(expense)
+                tempExpenses.append(expense)
+            }
+        }
+        return tempExpenses
+    }
     
+    func addExpense(name: String, value: Int, parentTable: Table) {
+        
+        if let localRealm = localRealm {
+            do {
+                try localRealm.write({
+                    let newExpense = Expense(name: name, value: Double(value), created: Date(), tableId: Int(parentTable.id), parentTable: parentTable)
+                    localRealm.add(newExpense)
+                })
+            } catch {
+                print("Error adding table \(error)")
+            }
+        }
+        
+    }
     
 }
